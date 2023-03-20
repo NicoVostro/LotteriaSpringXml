@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Gestisco i singoli bean-->
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:dati.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="luckyfortune" class="it.progettospring.Lotto">
+        <property name="min">
+            <value type="java.lang.Integer">
+                ${min}
+            </value>
+        </property>
+        <property name="max">
+            <value type="java.lang.Integer">
+                ${max}
+            </value>
+        </property>
+    </bean>
+
+    <bean id="player" class="it.progettospring.Giocatore" lazy-init="true">
+        <property name="nomeGiocatore" value="${giocatore}"></property>
+        <property name="giocati">
+            <array value-type="java.lang.Integer">
+                <value>50</value>
+                <value>40</value>
+                <value>30</value>
+                <value>60</value>
+                <value>10</value>
+            </array>
+        </property>
+        <property name="puntato" value="100"></property>
+    </bean>
+</beans>
